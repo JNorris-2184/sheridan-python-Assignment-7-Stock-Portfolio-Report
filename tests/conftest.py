@@ -17,7 +17,7 @@ def portfolio_csv(tmp_path):
     ]
 
     filename = tmp_path / 'portfolio.csv'
-    with open(filename, 'w', newline='') as file:
+    with open(filename, 'w', newline='', encoding="utf-8") as file:
         file.writelines(lines)
 
     return filename

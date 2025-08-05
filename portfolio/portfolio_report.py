@@ -28,21 +28,21 @@ def get_args(args=None):
     """
     Parse and return command line argument values
     """
-    return
+    return args
 
 
 def get_market_data(stocks_list):
     """
     Get the latest market data for the given stock symbols
     """
-    return
+    return stocks_list
 
 
 def calculate_metrics(input_file, market_data):
     """
     Calculates the various metrics of each of the stocks
     """
-    return
+    return input_file, market_data
 
 
 def save_portfolio(output_data, filename):
