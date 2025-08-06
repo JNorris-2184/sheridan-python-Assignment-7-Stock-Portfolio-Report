@@ -50,3 +50,12 @@ def test_save_portfolio(portfolio_csv):
         assert result == expected, (
             f'Expecting the file to contain: \n{result}'
         )
+
+
+def test_get_args():
+    """
+    Given get_args is called with the following data, the filenames
+    are returned as expected
+    """
+    args = portfolio_report.get_args(['input.csv', 'output.csv'])
+    assert args.source == 'input.csv' and args.target == 'output.csv'

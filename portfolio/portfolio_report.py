@@ -1,7 +1,7 @@
 """
 Generates performance reports for your stock portfolio.
 """
-# import argparse
+import argparse
 import csv
 # from collections import OrderedDict
 # import requests
@@ -20,15 +20,17 @@ def read_portfolio(filename):
     """
     with open(filename, newline='', encoding="utf-8") as file:
         csv_reader = csv.DictReader(file)
-        portfolio_dict = list(csv_reader)
-    return portfolio_dict
+        return list(csv_reader)
 
 
 def get_args(args=None):
     """
     Parse and return command line argument values
     """
-    return args
+    parser = argparse.ArgumentParser()
+    parser.add_argument('source')
+    parser.add_argument('target')
+    return parser.parse_args(args)
 
 
 def get_market_data(stocks_list):
