@@ -59,3 +59,16 @@ def test_get_args():
     """
     args = portfolio_report.get_args(['input.csv', 'output.csv'])
     assert args.source == 'input.csv' and args.target == 'output.csv'
+
+
+def test_get_market_data():
+    """
+     Given a list of stocks containing AAPL, returns historical
+     stock market data for AAPL
+     """
+    data = ['AAPL']
+    expected = [
+        {'date': '2025-08-06', 'open': 205.63, 'high': 215.38, 'low': 205.59,
+         'close': 213.25, 'adjusted_close': 213.25, 'volume': 106498000}
+    ]
+    assert portfolio_report.get_market_data(data) == expected
