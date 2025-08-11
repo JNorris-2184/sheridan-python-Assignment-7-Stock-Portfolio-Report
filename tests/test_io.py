@@ -59,22 +59,23 @@ def test_get_args():
     assert args.source == 'input.csv' and args.target == 'output.csv'
 
 
-def test_get_market_data():
+def test_get_market_data(requests_mock):
     """
-     Given a list of stocks containing AAPL, returns historical
-     stock market data for AAPL
+     Mock output of call to EODHD for AAPL
+     Assert get_market_data returns correct format
      """
     data = [
         OrderedDict([
             ('symbol', 'AAPL'),
             ('units', '100'),
             ('cost', '154.23'),
-        ]),
-        OrderedDict([
-            ('symbol', 'AMZN'),
-            ('units', '600'),
-            ('cost', '1223.43')
-        ])
-    ]
-    expected = [[0, 'AAPL', 229.35], [1, 'AMZN', 222.69]]
+        ])]
+    url = (f'https://eodhd.com/api/eod/{"AAPL"}'
+           f'?filter=last_close&api_token=demo&fmt=json')
+
+    requests_mock.get(
+        url,
+        json=230.00
+    )
+    expected = [[0, 'AAPL', 230.00]]
     assert portfolio_report.get_market_data(data) == expected
