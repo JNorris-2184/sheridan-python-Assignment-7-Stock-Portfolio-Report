@@ -1,3 +1,6 @@
+"""
+Required to to create package
+"""
 import setuptools
 
 setuptools.setup(
