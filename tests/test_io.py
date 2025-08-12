@@ -79,3 +79,43 @@ def test_get_market_data(requests_mock):
     )
     expected = [[0, 'AAPL', 230.00]]
     assert portfolio_report.get_market_data(data) == expected
+
+
+def test_calculate_metrics():
+    """
+     Given list of stocks and market data,
+     calculate_metrics returns expected portfolio data
+    """
+    stocks_list = [
+        OrderedDict([
+            ('symbol', 'AAPL'),
+            ('units', '100'),
+            ('cost', '154.23'),
+        ]),
+        OrderedDict([
+            ('symbol', 'AMZN'),
+            ('units', '600'),
+            ('cost', '1223.43')
+        ])
+    ]
+    market_data = [[0, 'AAPL', 230.00], [1, 'AMZN', 300]]
+    expected = [{
+        'symbol': 'AAPL',
+        'units': '100',
+        'cost': '154.23',
+        'latest-price': 230.0,
+        'book_value': 15422.999999999998,
+        'market_value': 23000.0,
+        'gain_loss': 7577.000000000002,
+        'change': 149.12792582506648},
+        {'symbol': 'AMZN',
+         'units': '600',
+         'cost': '1223.43',
+         'latest-price': 300,
+         'book_value': 734058.0,
+         'market_value': 180000,
+         'gain_loss': -554058.0,
+         'change': 24.521223118609157}]
+
+    assert (portfolio_report.calculate_metrics(stocks_list, market_data)
+            == expected)
